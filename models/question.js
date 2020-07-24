@@ -32,6 +32,25 @@ const question = new Schema({
     answer_pic: {
         type: String,
         required: false
+    },
+    vr_link: {
+        type: String,
+        required: false
+    },
+    correct_score: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    wrong_score: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    hint_score: {
+        type: Number,
+        required: false,
+        default: 0
     }
     })
 module.exports = model('Question', question)

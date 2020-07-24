@@ -1,0 +1,65 @@
+<%- include ("../parts/header.ejs") -%>
+<div class="container" style="min-height:100vh;">
+  <div class="row align-items-center justify-content-center" style="min-height:100vh;">
+    <div class="col-10 col-md-8">
+      <div class="row">
+        <div class="col">
+          <a href="/games"><h4>Назад в меню</h4></a>
+          <h2>Пользователи</h2>
+          </div>
+          </div>
+          <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Логин</th>
+      <th scope="col">Имя</th>
+      <th scope="col">Удалить</th>
+    </tr>
+  </thead>
+  <tbody>
+          <% users.forEach(function(item){ %>
+            <tr>
+              <td><%= item.login %></td>
+              <td><%= item.name %></td>
+              <td><form action="/deleteuser/<%= item._id %>" method="POST"><button type="submit" class="btn btn-warning btn-sm">Удалить</button></form></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+        <button type="button" class="btn btn-primary" style="margin-bottom:5%;"data-toggle="modal" data-target="#addModal">Добавить...</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Добавить игру</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="/newuser" method="POST">
+          <div class="form-group">
+            <label for="questname" class="col-form-label">Логин:</label>
+            <input type="text" name="login" required class="form-control" id="questname">
+          </div>
+          <div class="form-group">
+      <label for="password" class="col-form-label">Пароль:</label>
+      <input type="password" name="password" required class="form-control" id="password">
+    </div>
+    <div class="form-group">
+      <label for="name" class="col-form-label">Имя:</label>
+      <input type="text" name="name" required class="form-control" id="name">
+    </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+            <button type="submit" class="btn btn-primary">Создать</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

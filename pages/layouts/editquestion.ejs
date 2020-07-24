@@ -1,0 +1,47 @@
+<%- include ("../parts/header.ejs") -%>
+<div class="container" style="min-height:100vh;">
+  <div class="row align-items-center justify-content-center" style="min-height:100vh;">
+    <div class="col-10 col-md-8 col-lg-6 col-xl-6">
+      <form action="/updatequestion/<%= question._id %>" method="POST">
+
+        <div class="form-group">
+    <label for="text" class="col-form-label">Текст вопроса:</label>
+    <textarea class="form-control" required name="text" id="text"><%= question.question_text %></textarea>
+  </div>
+  <div class="form-group">
+<label for="hint" class="col-form-label">Подсказка:</label>
+<textarea class="form-control" name="hint" id="hint"><%= question.hint %></textarea>
+</div>
+<div class="form-group">
+<label for="answer" class="col-form-label">Ответы через ; :</label>
+<textarea class="form-control" required name="answer" id="answer"><%= question.answer %></textarea>
+</div>
+<div class="form-group">
+<label for="answerout" class="col-form-label">Сообщение на правильный ответ:</label>
+<textarea class="form-control" required name="answerout" id="answerout"><%= question.answer_output %></textarea>
+</div>
+<div class="form-group">
+<label for="vrlink" class="col-form-label">Ссылка на экспонат в VR-туре:</label>
+<input type='text' class="form-control" name="vrlink" id="vrlink"><%= question.vrlink %></input>
+</div>
+<div class="form-group">
+<label for="cscore" class="col-form-label">Очков за правильный ответ:</label>
+<input type='number' class="form-control" required value="<%= question.correct_score %>" name="cscore" id="cscore"></input>
+</div>
+<div class="form-group">
+<label for="hscore" class="col-form-label">Очков за подсказку:</label>
+<input type='number' class="form-control" required name="hscore" value="<%= question.hint_score %>" id="hscore"></input>
+</div>
+<div class="form-group">
+<label for="wscore" class="col-form-label">Очков за неправильный ответ:</label>
+<input type='number' class="form-control" required name="wscore" value="<%= question.wrong_score %>" id="wscore"></input>
+</div>
+
+        <div class="form-group">
+          <a href="/game/<%= question.questid %>"><button type="button" class="btn btn-secondary">Назад</button></a>
+          <button type="submit" class="btn btn-primary">Сохранить</button>
+        </div>
+      </form>
+      </div>
+        </div>
+          </div>

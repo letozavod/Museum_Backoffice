@@ -6,15 +6,16 @@ const router = Router()
 router.get('/login', async (req, res) => {
     user = req.session.userId ? await User.findById(req.session.userId) : null
     if(user){
-        res.send('Успешно')
-        //res.redirect('/games')
+
+        res.redirect('/games')
         //res.redirect('/login')
     }else{
-        res.send('Не прошел по куки')
-        //res.render('main', {
-        //    layout: 'layouts/login',
-        //    title: 'Вход'
-        //})
+      //  res.send('Не прошел по куки')
+        res.render('layouts/login', {
+            layout: 'layouts/index',
+            title: 'Вход',
+            alarmShow: false
+        })
     }
 })
 
@@ -26,15 +27,22 @@ router.post('/login', async(req, res) => {
     if (user){
         if (user.validatePassword(password)){
             req.session.userId = user._id
-            res.send('Залогинился')
-            //res.redirect('/games')
+
+            res.redirect('/games')
         }else{
-            res.send('Неправильный пароль')
+            res.render('layouts/login', {
+                layout: 'layouts/index',
+                title: 'Вход',
+                alarmShow: true
+            })
         }
     }else{
         req.session.userId = null
-        res.send('Неа, нихуя')
-        //res.redirect('/login')
+        res.render('layouts/login', {
+            layout: 'layouts/index',
+            title: 'Вход',
+            alarmShow: true
+        })
     }
 })
 
