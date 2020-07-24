@@ -1,0 +1,53 @@
+<%- include ("../parts/header.ejs") -%>
+<div class="container" style="min-height:100vh;">
+  <div class="row align-items-center justify-content-center" style="min-height:100vh;">
+    <div class="col-10 col-md-8 col-lg-6">
+      <h3 style="text-align:center">Главное меню</h3>
+      <div class="list-group">
+  <% quests.forEach(function(item){ %>
+  <a href="/game/<%= item._id %>" class="list-group-item list-group-item-action"><%= item.quest_name %> </a>
+  <% }) %>
+  <a href="" class="list-group-item list-group-item-action" data-toggle="modal" data-target="#addModal">Добавить...</a>
+  <% if (user.god) { %>
+  <a href="/users" class="list-group-item list-group-item-action">Пользователи</a>
+  <% } %>
+</div>
+      </div>
+      </div>
+      </div>
+      <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Добавить игру</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form action="/addgame" method="POST">
+                <div class="form-group">
+                  <label for="questname" class="col-form-label">Название:</label>
+                  <input type="text" name="questname" required class="form-control" id="questname">
+                </div>
+                <div class="form-group">
+            <label for="questdesc" class="col-form-label">Описание:</label>
+            <textarea class="form-control" name="questdesc" required id="questdesc"></textarea>
+          </div>
+          <div class="form-group">
+          <div class="form-check">
+                <input class="form-check-input" value="on" name="islinear" type="checkbox" id="gridCheck">
+                <label class="form-check-label"  style="font-size: 100%" for="gridCheck">
+                  Фиксированный порядок вопросов
+                </label>
+              </div>
+              </div>
+                <div class="form-group">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                  <button type="submit" class="btn btn-primary">Создать</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>

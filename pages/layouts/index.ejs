@@ -3,13 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <style type="text/css">
+   .svg-icon:hover{
+     fill: #5c5c5c
+   }
+  </style>
+
     <title><%= title %></title>
 </head>
 <body>
-    <h2> До хедера </h2>
+<main style="min-height:100vh">
 
     <%-body -%>
-    
-    <h2> После футера </h2>
+</main>
+<footer>
+<h2><a href="http://jarm-web.com" style="color:#000; text-decoration:none; padding-left:3%;">Made by  <img src="http://jarm-web.com/img/logo-jarm.svg" style="max-height:28px"></a></h2>
+</footer>
 </body>
 </html>

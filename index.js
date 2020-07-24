@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 const expressLayouts = require("express-ejs-layouts")
 
 const PORT = process.env.PORT || 3000
-const MONGO = ""
+const MONGO = "mongodb+srv://admin:1913b7cd@museumbot-bebcr.mongodb.net/test?retryWrites=true&w=majority"
 
 const app = express()
 app.use(session({
@@ -63,13 +63,5 @@ async function start(){
 }
 
 
+
 start()
-
-
-
-
-
-
-
-
-

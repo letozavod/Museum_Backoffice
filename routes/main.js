@@ -3,10 +3,7 @@ const { model } = require('mongoose')
 const router = Router()
 
 router.get('/', (req, res) => {
-    res.render('main', {
-        layout: 'layouts/index',
-        title: 'Привет'
-    })
+  res.redirect('/login')
 })
 
 module.exports = router
