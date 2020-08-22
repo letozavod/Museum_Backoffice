@@ -3,7 +3,6 @@ const { model } = require('mongoose')
 const Quest = require('../models/quest')
 const User = require('../models/user')
 const Question = require('../models/question')
-const question = require('../models/question')
 const sorter = require('../sorter.js')
 
 const router = Router()
@@ -28,10 +27,10 @@ router.get('/games', async(req, res) => {
 })
 
 router.get('/game/:id', async (req, res) => {
-    user = req.session.userId ? await User.findById(req.session.userId) : null
+    const user = req.session.userId ? await User.findById(req.session.userId) : null
     if (user) {
-        quest = await Quest.findById(req.params.id)
-        questions = quest ? await Question.find({ questid: req.params.id }) : null
+        const quest = await Quest.findById(req.params.id)
+        const questions = quest ? await Question.find({ questid: req.params.id }) : null
 
 
 
@@ -56,6 +55,7 @@ router.post('/addgame', async (req, res) => {
     if (user) {
         questName = req.body.questname
         questDesc = req.body.questdesc
+        questEnd = req.body.questend
         isActive = false
         if (req.body.islinear=="on"){
         isLinear = true} else {
@@ -66,7 +66,8 @@ router.post('/addgame', async (req, res) => {
             isactive: isActive,
             islinear: isLinear,
             quest_name: questName,
-            quest_desc: questDesc
+            quest_desc: questDesc,
+            quest_end: questEnd
         }).save()
 
          res.redirect('/games')
@@ -87,9 +88,9 @@ router.post('/deletegame/:id', async (req, res) => {
 })
 
 router.post('/updategame/:id', async (req, res) => {
-    user = req.session.userId ? await User.findById(req.session.userId) : null
+    const user = req.session.userId ? await User.findById(req.session.userId) : null
     if (user) {
-        quest = req.params.id ? await Quest.findById(req.params.id) : null
+        const quest = req.params.id ? await Quest.findById(req.params.id) : null
         if (quest) {
           if (req.body.islinear=="on"){
           isLinear = true} else {
@@ -98,6 +99,7 @@ router.post('/updategame/:id', async (req, res) => {
             quest.islinear = isLinear
             quest.quest_name = req.body.questname
             quest.quest_desc = req.body.questdesc
+            quest.quest_end = req.body.questend
             await quest.save()
           res.redirect('/game/'+req.params.id)
         } else {
