@@ -51,6 +51,14 @@ const question = new Schema({
         type: Number,
         required: false,
         default: 0
+    },
+    image: {
+        type: Buffer,
+        required: false
+    },
+    image_name: {
+        type: String,
+        required: false
     }
     })
 module.exports = model('Question', question)

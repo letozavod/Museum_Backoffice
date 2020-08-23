@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const bodyParser = require('body-parser');
 const MongoStore = require('connect-mongo')(session);
 const expressLayouts = require("express-ejs-layouts")
+const fileUpload = require('express-fileupload');
 
 const PORT = process.env.PORT || 3000
 const MONGO = "mongodb+srv://admin:1913b7cd@museumbot-bebcr.mongodb.net/test?retryWrites=true&w=majority"
@@ -24,6 +25,7 @@ app.use(session({
         secure: false
     }
 }));
+app.use(fileUpload({ limits: { fileSize: 10 * 1024 * 1024 }}))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");

@@ -54,7 +54,9 @@ router.post('/game/:id/addquestion', async (req, res) => {
             vr_link: req.body.vrlink,
             correct_score: req.body.cscore,
             hint_score: req.body.hscore,
-            wrong_score: req.body.wscore
+            wrong_score: req.body.wscore,
+            image: req.files.file.data,
+            image_name: req.files.file.name,
         }).save()
 
 
@@ -91,6 +93,8 @@ router.post('/updatequestion/:id', async (req, res) => {
             question.correct_score = req.body.cscore,
             question.hint_score = req.body.hscore,
             question.wrong_score = req.body.wscore
+            question.image = req.files.file.data
+            question.image_name = req.files.file.name
             await question.save()
             res.redirect('/game/'+question.questid)
         }else{

@@ -4,47 +4,55 @@
     <div class="col-10 col-md-8">
       <div class="row">
         <div class="col">
-          <a href="/games"><h4>Назад в меню</h4></a>
+          <a href="/games">
+            <h4>Назад в меню</h4>
+          </a>
           <h2><%= quest.quest_name %></h2>
           <form action="/activategame/<%= quest._id %>" method="POST" style="margin-bottom:2%;">
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Изменить</button>
-          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Удалить</button>
-          <% if (quest.isactive) { %>
-          <button type="submit" class="btn btn-secondary">Выключить</button></form>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal">Изменить</button>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">Удалить</button>
+            <% if (quest.isactive) { %>
+            <button type="submit" class="btn btn-secondary">Выключить</button></form>
           <% } else { %>
           <button type="submit" class="btn btn-success">Активировать</button></form>
 
-            <% } %>
-          </div>
-          </div>
-          <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Вопрос</th>
-      <th scope="col">Ответ</th>
-      <th scope="col">Изменить</th>
-      <th scope="col">Удалить</th>
-    </tr>
-  </thead>
-  <tbody>
+          <% } %>
+        </div>
+      </div>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Вопрос</th>
+            <th scope="col">Ответ</th>
+            <th scope="col">Изменить</th>
+            <th scope="col">Удалить</th>
+          </tr>
+        </thead>
+        <tbody>
           <% questions.forEach(function(item){ %>
-            <tr>
-              <td><%= item.order_num + 1%></td>
-              <td><%= item.question_text.slice(0,50)+'...' %></td>
-              <td><%= item.answer %></td>
-              <td><a href="/updatequestion/<%= item._id %>"><button type="button" class="btn btn-primary btn-sm">Изменить</button></a></td>
-              <td><form action="/deletequestion/<%= item._id %>" method="POST"><button type="submit" class="btn btn-warning btn-sm">Удалить</button></form></td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
-        <button type="button" class="btn btn-primary" style="margin-bottom:5%;"data-toggle="modal" data-target="#addQuestionModal">Добавить...</button>
+          <tr>
+            <td><%= item.order_num + 1%></td>
+            <td><%= item.question_text.slice(0,50)+'...' %></td>
+            <td><%= item.answer %></td>
+            <td><a href="/updatequestion/<%= item._id %>"><button type="button"
+                  class="btn btn-primary btn-sm">Изменить</button></a></td>
+            <td>
+              <form action="/deletequestion/<%= item._id %>" method="POST"><button type="submit"
+                  class="btn btn-warning btn-sm">Удалить</button></form>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+      <button type="button" class="btn btn-primary" style="margin-bottom:5%;" data-toggle="modal"
+        data-target="#addQuestionModal">Добавить...</button>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -57,24 +65,22 @@
         <form action="/updategame/<%= quest._id %>" method="POST">
           <div class="form-group">
             <label for="questname" class="col-form-label">Название:</label>
-            <input type="text" name="questname" required class="form-control" value="<%= quest.quest_name %>" id="questname">
+            <input type="text" name="questname" required class="form-control" value="<%= quest.quest_name %>"
+              id="questname">
           </div>
           <div class="form-group">
-      <label for="questdesc" class="col-form-label">Описание:</label>
-      <textarea class="form-control" name="questdesc" required id="questdesc"><%= quest.quest_desc %></textarea>
-      <label for="questdesc" class="col-form-label">Вывод после квеста:</label>
-      <textarea class="form-control" name="questend" required id="questdend"><%= quest.quest_end %></textarea>
-    </div>
-    <div class="form-check">
-          <input class="form-check-input"
-          <% if (quest.islinear) { %>
-          checked
-          <% } %>
-          name="islinear" type="checkbox" value="on" id="gridCheck">
-          <label class="form-check-label" style="font-size: 100%" for="gridCheck">
-            Фиксированный порядок вопросов
-          </label>
-        </div>
+            <label for="questdesc" class="col-form-label">Описание:</label>
+            <textarea class="form-control" name="questdesc" required id="questdesc"><%= quest.quest_desc %></textarea>
+            <label for="questdesc" class="col-form-label">Вывод после квеста:</label>
+            <textarea class="form-control" name="questend" required id="questdend"><%= quest.quest_end %></textarea>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" <% if (quest.islinear) { %> checked <% } %> name="islinear" type="checkbox"
+              value="on" id="gridCheck">
+            <label class="form-check-label" style="font-size: 100%" for="gridCheck">
+              Фиксированный порядок вопросов
+            </label>
+          </div>
           <div class="form-group">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
             <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -85,7 +91,8 @@
   </div>
 </div>
 
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -99,13 +106,15 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-        <form action="/deletegame/<%= quest._id %>" method="POST"><button type="submit" class="btn btn-danger">Удалить</button></form>
+        <form action="/deletegame/<%= quest._id %>" method="POST"><button type="submit"
+            class="btn btn-danger">Удалить</button></form>
       </div>
     </div>
   </div>
 </div>
 
-<div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+<div class="modal fade" id="addQuestionModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2"
+  aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -115,40 +124,44 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/game/<%= quest._id %>/addquestion/" method="POST">
+        <form action="/game/<%= quest._id %>/addquestion/" method="POST" enctype="multipart/form-data">
 
           <div class="form-group">
-      <label for="text" class="col-form-label">Текст вопроса:</label>
-      <textarea class="form-control" required name="text" id="text"></textarea>
-    </div>
-    <div class="form-group">
-<label for="hint" class="col-form-label">Подсказка:</label>
-<textarea class="form-control" name="hint" id="hint"></textarea>
-</div>
-<div class="form-group">
-<label for="answer" class="col-form-label">Ответы через ; :</label>
-<textarea class="form-control" required name="answer" id="answer"></textarea>
-</div>
-<div class="form-group">
-<label for="answerout" class="col-form-label">Сообщение на правильный ответ:</label>
-<textarea class="form-control" required name="answerout" id="answerout"></textarea>
-</div>
-<div class="form-group">
-<label for="vrlink" class="col-form-label">Ссылка на экспонат в VR-туре:</label>
-<input type='text' class="form-control" name="vrlink" id="vrlink"></input>
-</div>
-<div class="form-group">
-<label for="cscore" class="col-form-label">Очков за правильный ответ:</label>
-<input type='number' class="form-control" value="0" required name="cscore" id="cscore"></input>
-</div>
-<div class="form-group">
-<label for="hscore" class="col-form-label">Очков за подсказку:</label>
-<input type='number' class="form-control" value="0" required name="hscore" id="hscore"></input>
-</div>
-<div class="form-group">
-<label for="wscore" class="col-form-label">Очков за неправильный ответ:</label>
-<input type='number' class="form-control" value="0" required name="wscore" id="wscore"></input>
-</div>
+            <label for="text" class="col-form-label">Текст вопроса:</label>
+            <textarea class="form-control" required name="text" id="text"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="hint" class="col-form-label">Подсказка:</label>
+            <textarea class="form-control" name="hint" id="hint"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="answer" class="col-form-label">Ответы через ; :</label>
+            <textarea class="form-control" required name="answer" id="answer"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="answerout" class="col-form-label">Сообщение на правильный ответ:</label>
+            <textarea class="form-control" required name="answerout" id="answerout"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="answerout" class="col-form-label">Изображение:</label>
+            <input type="file" name="file" id='file' class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="vrlink" class="col-form-label">Ссылка на экспонат в VR-туре:</label>
+            <input type='text' class="form-control" name="vrlink" id="vrlink"></input>
+          </div>
+          <div class="form-group">
+            <label for="cscore" class="col-form-label">Очков за правильный ответ:</label>
+            <input type='number' class="form-control" value="0" required name="cscore" id="cscore"></input>
+          </div>
+          <div class="form-group">
+            <label for="hscore" class="col-form-label">Очков за подсказку:</label>
+            <input type='number' class="form-control" value="0" required name="hscore" id="hscore"></input>
+          </div>
+          <div class="form-group">
+            <label for="wscore" class="col-form-label">Очков за неправильный ответ:</label>
+            <input type='number' class="form-control" value="0" required name="wscore" id="wscore"></input>
+          </div>
 
           <div class="form-group">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
