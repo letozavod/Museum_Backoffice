@@ -1,0 +1,37 @@
+<%- include ("../parts/header.ejs") -%>
+<div class="container" style="min-height:100vh;">
+  <div class="row align-items-center justify-content-center" style="min-height:100vh;">
+    <div class="col-10 col-md-8">
+      <div class="row">
+        <div class="col">
+          <a href="/games"><h4>Назад в меню</h4></a>
+          <h2>Промо-коды</h2>
+          </div>
+          </div>
+          <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Логин</th>
+      <th scope="col">Код</th>
+      <th scope="col">Скидка, %</th>
+      <th scope="col">Статус</th>
+    </tr>
+  </thead>
+  <tbody>
+          <% codes.forEach(function(item){ %>
+            <tr>
+              <td><%= item.userid.username %></td>
+              <td><%= item.coupon %></td>
+              <td><%= item.discount %></td>
+              <% if (item.isactive){ %>
+                <td style="color: #66ff00">Активен</td>
+                <% } else { %>
+  <td style="color: #ff0000">Не активен</td>
+                  <% } %>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+    </div>
+  </div>
+</div>

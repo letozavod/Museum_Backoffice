@@ -33,7 +33,11 @@
           <% questions.forEach(function(item){ %>
           <tr>
             <td><%= item.order_num + 1%></td>
+            <% if (item.question_text.length >50) { %>
             <td><%= item.question_text.slice(0,50)+'...' %></td>
+            <% }else { %>
+              <td><%= item.question_text %></td>
+              <% } %>
             <td><%= item.answer %></td>
             <td><a href="/updatequestion/<%= item._id %>"><button type="button"
                   class="btn btn-primary btn-sm">Изменить</button></a></td>
@@ -118,7 +122,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel2">Добавить игру</h5>
+        <h5 class="modal-title" id="exampleModalLabel2">Добавить вопрос</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -129,6 +133,10 @@
           <div class="form-group">
             <label for="text" class="col-form-label">Текст вопроса:</label>
             <textarea class="form-control" required name="text" id="text"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="answerout" class="col-form-label">Изображение на вопрос:</label>
+            <input type="file" name="file" id='file' class="form-control">
           </div>
           <div class="form-group">
             <label for="hint" class="col-form-label">Подсказка:</label>
@@ -143,8 +151,8 @@
             <textarea class="form-control" required name="answerout" id="answerout"></textarea>
           </div>
           <div class="form-group">
-            <label for="answerout" class="col-form-label">Изображение:</label>
-            <input type="file" name="file" id='file' class="form-control">
+            <label for="answerout" class="col-form-label">Изображение на правильный ответ:</label>
+            <input type="file" name="ans_file" id='ans_file' class="form-control">
           </div>
           <div class="form-group">
             <label for="vrlink" class="col-form-label">Ссылка на экспонат в VR-туре:</label>

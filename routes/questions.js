@@ -44,7 +44,7 @@ router.post('/game/:id/addquestion', async (req, res) => {
         answer = req.body.answer.replace('; ',';')
         answerOut = req.body.answerout
         orderNum = maximum
-        await new Question({
+        question = new Question({
             question_text: qText,
             answer: answer,
             answer_output: answerOut,
@@ -55,9 +55,17 @@ router.post('/game/:id/addquestion', async (req, res) => {
             correct_score: req.body.cscore,
             hint_score: req.body.hscore,
             wrong_score: req.body.wscore,
-            image: req.files.file.data,
-            image_name: req.files.file.name,
-        }).save()
+        })
+if (req.files){
+      if (req.files.file.data)  {
+        question.image = req.files.file.data
+        question.image_name = req.files.file.name
+      }
+      if (req.files.ans_file.data)  {
+        question.ans_image = req.files.ans_file.data
+        question.ans_image_name = req.files.ans_file.name
+      }}
+      await question.save()
 
 
         // --------------
@@ -85,6 +93,15 @@ router.post('/updatequestion/:id', async (req, res) => {
         question = req.params.id ? await Question.findById(req.params.id) : null
         if(question){
           answer = req.body.answer.replace('; ',';')
+          if (req.files){
+          if (!question.image && req.files.file){
+            question.image = req.files.file.data
+            question.image_name = req.files.file.name
+          }
+          if (!question.ans_image && req.files.ans_file){
+            question.ans_image = req.files.ans_file.data
+            question.ans_image_name = req.files.ans_file.name
+          }}
             question.question_text = req.body.text
             question.answer = answer
             question.answer_output = req.body.answerout
@@ -92,13 +109,50 @@ router.post('/updatequestion/:id', async (req, res) => {
             question.vr_link = req.body.vrlink,
             question.correct_score = req.body.cscore,
             question.hint_score = req.body.hscore,
-            question.wrong_score = req.body.wscore
-            question.image = req.files.file.data
-            question.image_name = req.files.file.name
+            question.wrong_score = req.body.wscore,
+
             await question.save()
             res.redirect('/game/'+question.questid)
         }else{
           res.redirect('/game/'+question.questid)
+
+        }
+    } else {
+
+        res.redirect('/login')
+    }
+})
+
+router.get('/deletepic/:id', async (req, res) => {
+    user = req.session.userId ? await User.findById(req.session.userId) : null
+    if (user) {
+        question = req.params.id ? await Question.findById(req.params.id) : null
+        if(question && question.image){
+          question.image = null
+          question.image_name = ''
+
+            await question.save()
+            res.redirect('/updatequestion/'+question._id)
+        }else{
+          res.redirect('/updatequestion/'+question._id)
+        }
+    } else {
+
+        res.redirect('/login')
+    }
+})
+router.get('/deletepicans/:id', async (req, res) => {
+    user = req.session.userId ? await User.findById(req.session.userId) : null
+    if (user) {
+        question = req.params.id ? await Question.findById(req.params.id) : null
+        if(question && question.ans_image){
+          question.ans_image = null
+          question.ans_image_name = ''
+
+            await question.save()
+            res.redirect('/updatequestion/'+question._id)
+        }else{
+          res.redirect('/updatequestion/'+question._id)
 
         }
     } else {

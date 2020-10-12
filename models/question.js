@@ -25,14 +25,6 @@ const question = new Schema({
         type: String,
         required: false
     },
-    question_pic: {
-        type: String,
-        required: false
-    },
-    answer_pic: {
-        type: String,
-        required: false
-    },
     vr_link: {
         type: String,
         required: false
@@ -57,6 +49,14 @@ const question = new Schema({
         required: false
     },
     image_name: {
+        type: String,
+        required: false
+    },
+    ans_image: {
+        type: Buffer,
+        required: false
+    },
+    ans_image_name: {
         type: String,
         required: false
     }

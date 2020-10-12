@@ -7,7 +7,7 @@ const MongoStore = require('connect-mongo')(session);
 const expressLayouts = require("express-ejs-layouts")
 const fileUpload = require('express-fileupload');
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT || 80
 const MONGO = "mongodb+srv://admin:1913b7cd@museumbot-bebcr.mongodb.net/test?retryWrites=true&w=majority"
 
 const app = express()

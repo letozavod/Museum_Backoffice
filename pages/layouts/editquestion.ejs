@@ -8,6 +8,23 @@
           <label for="text" class="col-form-label">Текст вопроса:</label>
           <textarea class="form-control" required name="text" id="text"><%= question.question_text %></textarea>
         </div>
+        <% if (question.image){ %>
+          <div class="row justify-content-center">
+            <div class="col-10">
+           <img src="data:image/jpeg;base64,<%= question.image.toString('base64') %>" style="max-width:100%">
+           </div>
+           <div class="col-2" style="padding-top:10%;">
+           <a href="/deletepic/<%= question._id %>"><button type="button" class="close" aria-label="Удалить">
+             <span aria-hidden="true">&times;</span>
+           </button></a>
+           </div>
+           </div>
+      <% } else {%>
+        <div class="form-group">
+          <label for="answerout" class="col-form-label">Изображение для вопроса:</label>
+          <input type="file" name="file" id='file' class="form-control">
+        </div>
+        <% } %>
         <div class="form-group">
           <label for="hint" class="col-form-label">Подсказка:</label>
           <textarea class="form-control" name="hint" id="hint"><%= question.hint %></textarea>
@@ -21,10 +38,23 @@
           <textarea class="form-control" required name="answerout"
             id="answerout"><%= question.answer_output %></textarea>
         </div>
+        <% if (question.ans_image){ %>
+          <div class="row justify-content-center">
+            <div class="col-10">
+           <img src="data:image/jpeg;base64,<%= question.ans_image.toString('base64') %>" style="max-width:100%">
+         </div>
+         <div class="col-2" style="padding-top:10%;">
+           <a href="/deletepicans/<%= question._id %>"><button type="button" class="close" aria-label="Удалить">
+             <span aria-hidden="true">&times;</span>
+           </button></a>
+         </div>
+         </div>
+      <% } else {%>
         <div class="form-group">
-          <label for="answerout" class="col-form-label">Изображение:</label>
-          <input type="file" name="file" id='file' class="form-control">
+          <label for="answerout" class="col-form-label">Изображение на правильный ответ:</label>
+          <input type="file" name="ans_file" id='ans_file' class="form-control">
         </div>
+        <% } %>
         <div class="form-group">
           <label for="vrlink" class="col-form-label">Ссылка на экспонат в VR-туре:</label>
           <input type='text' class="form-control" name="vrlink" id="vrlink"><%= question.vrlink %></input>
